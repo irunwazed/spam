@@ -1,0 +1,53 @@
+// Whatsapp BotSpam
+var allElementsClassName = "m6ZEb";
+var buttonSendClass = "._35EW6";
+var inputMessageClassName = "_2S1VP";
+
+var timer = setInterval(general, 1000);
+
+function general() {
+    if (document.getElementsByClassName(allElementsClassName)[0] != null) {
+        var item = document.getElementsByClassName(allElementsClassName)[0];
+        var element = item.cloneNode(true);
+        element.innerHTML = 'Achon666ju5t - Demeter_16<div style="height: 110px; width: 100%;"> \
+                                <input type="text" id="inputMessage" placeholder="Text to spam" style="margin-left: 10px; margin-top: 10px; width: calc(100% - 50px); height: 30px; padding-left: 10px"> \
+                                <hr style="border-color: white; color: #dbdbdb; background-color: #dbdbdb; border: none; height: 1px;"> \
+                                <div style="padding-left: 10px;"> \
+                                    <div data-icon="send" class="imgiconicon-send" style="cursor:pointer; height: 36px; display: inline-block; width: 100%;"> \
+                                        <input type="number" min="1" id="timesSend" placeholder="Jumlah Text" style="width:50px;padding-left: 10px;max-width: 40%;width: 80%;height: 30px;margin-right: 10px;float:left;"> \
+                                        <button type="button" id="spam" style="background-color: transparent; color: transparent;"> \
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36" style="display: inline"> \
+                                                <path opacity=".4" d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path> \
+                                            </svg> \
+                                        </button> \
+                                    </div>  \
+                                </div> \
+                            </div>';
+        item.appendChild(element);
+        console.log("Spammed . . .");
+        document.getElementById("spam").addEventListener("click", spam);
+        clearInterval(timer);
+    } else {
+        console.log("Waiting for whatsapp to load...");
+    }
+}
+
+function dispatch(input, message) {
+    var evt = new InputEvent('input', {
+        bubbles: true
+    });
+    input.innerHTML = message;
+    input.dispatchEvent(evt);
+    document.querySelector(buttonSendClass).click();
+}
+
+function spam() {
+    var text = document.getElementById("inputMessage").value;
+    var reps = document.getElementById("timesSend").value;
+    var input = document.getElementsByClassName(inputMessageClassName + " copyable-text selectable-text")[0];
+    var counter = 1;
+    while (counter <= reps) {
+        dispatch(input, text);
+        counter++;
+    }
+}
